@@ -380,6 +380,54 @@
             margin: 16px 0;
         }
 
+        /* Founder CEO Title */
+        .founder-title {
+            color: #00c7b7;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Contact Persons Styling */
+        .contact-persons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .person-card {
+            background: rgba(42, 77, 90, 0.6);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #00c7b7;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .person-name {
+            color: #00c7b7;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .designation {
+            color: #a6c1cc;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .phone {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
         /* Footer */
         .footer {
             background: #0e1e25;
@@ -482,6 +530,26 @@
             .logo-text {
                 display: none;
             }
+            
+            .contact-persons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .person-card {
+                min-width: auto;
+                width: 100%;
+                max-width: 320px;
+            }
+            
+            .person-name {
+                font-size: 1.2rem;
+            }
+            
+            .founder-title {
+                font-size: 1.2rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -521,6 +589,14 @@
             
             .logo-line4 {
                 font-size: 7px;
+            }
+            
+            .person-name {
+                font-size: 1.1rem;
+            }
+            
+            .founder-title {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -686,9 +762,26 @@
     <section id="contact" class="contact">
         <h2>Contact Us</h2>
         <div class="contact-info">
-            <p>Email: cyberjurist.pk@gmail.com</p>
-            <p>Phone: 0300-989-3632 | 0314-507-9122</p>
-            <p>24/7 Free Advisory Available</p>
+            <p>📧 Email: cyberjurist.pk@gmail.com</p>
+            
+            <!-- Founder & CEO Title - Box ke Uper -->
+            <div class="founder-title">Founder & CEO</div>
+            
+            <div class="contact-persons">
+                <div class="person-card">
+                    <div class="person-name">Ashfaq Haider Advocate</div>
+                    <p class="designation">Cyber Law Attorney (CLA)</p>
+                    <p class="phone">📞 0300-989-3632</p>
+                </div>
+                
+                <div class="person-card">
+                    <div class="person-name">Yasir Zareen Khan</div>
+                    <p class="designation">IT Engineer (ITE)</p>
+                    <p class="phone">📞 0314-507-9122</p>
+                </div>
+            </div>
+            
+            <p>⏰ 24/7 Free Advisory Available</p>
         </div>
         <a href="#contact" class="btn">Start Consultation</a>
     </section>
