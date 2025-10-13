@@ -3,54 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Jurist - Cybersecurity Solutions</title>
+    <title>Cyber Jurist - Prosecuting E-Crimes</title>
     
-    <!-- YAHAN APKA FAVICON SET HAI -->
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a2a6c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --primary: #1a73e8;
-            --secondary: #0d47a1;
-            --accent: #00c853;
-            --dark: #121212;
-            --light: #f8f9fa;
-            --danger: #e53935;
-            --warning: #ffb300;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
         }
 
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container {
-            width: 90%;
+        /* Header & Navigation */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--dark);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .header-content {
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -59,326 +67,218 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            color: var(--accent);
-        }
-
-        .logo-text {
+            gap: 0.5rem;
             font-size: 1.5rem;
             font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
         }
 
-        .logo-text span {
+        .logo i {
             color: var(--accent);
         }
 
-        nav ul {
+        .nav-menu {
             display: flex;
-            list-style: none;
             gap: 2rem;
+            list-style: none;
         }
 
-        nav a {
-            color: white;
+        .nav-menu a {
+            color: var(--light);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            transition: color 0.3s ease;
+            position: relative;
         }
 
-        nav a:hover {
+        .nav-menu a:hover {
             color: var(--accent);
         }
 
-        .nav-icon {
-            font-size: 1.1rem;
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
             border: none;
-            color: white;
-            font-size: 1.5rem;
             cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #00b248;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 200, 83, 0.3);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--accent);
-            margin-left: 1rem;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--accent);
-        }
-
-        /* Services Section */
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
-
-        .section-title p {
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .service-card p {
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        /* About Section */
-        .about {
-            background-color: var(--light);
-        }
-
-        .about-content {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 4rem;
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: #555;
-        }
-
-        .about-image {
-            flex: 1;
-            border-radius: 8px;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, rgba(37, 99, 235, 0.1) 100%);
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .about-image img {
-            width: 100%;
-            height: auto;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%232563eb" fill-opacity="0.05" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
             display: block;
         }
 
-        /* Stats Section */
-        .stats {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-item h3 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: #555;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .author-info h4 {
-            color: var(--dark);
-            margin-bottom: 0.2rem;
-        }
-
-        .author-info p {
-            color: #777;
+        .stat-label {
             font-size: 0.9rem;
+            color: var(--gray);
         }
 
-        /* Contact Section */
-        .contact {
-            background-color: var(--light);
+        .hero-visual {
+            position: relative;
         }
 
-        .contact-content {
-            display: flex;
-            gap: 4rem;
-        }
-
-        .contact-info {
-            flex: 1;
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-            width: 40px;
-            height: 40px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-form {
-            flex: 1;
-            background-color: white;
+        .floating-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(2) {
+            animation-delay: 2s;
+            margin-left: 2rem;
+        }
+
+        .floating-card:nth-child(3) {
+            animation-delay: 4s;
+            margin-left: -2rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Booking Form */
+        .booking-section {
+            padding: 6rem 2rem;
+            background: var(--dark);
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .booking-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .booking-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
         }
 
         .form-group {
@@ -388,47 +288,313 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
+            color: var(--light);
             font-weight: 500;
-            color: var(--dark);
         }
 
         .form-control {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
             font-size: 1rem;
-            transition: border 0.3s;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: var(--primary);
             outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         textarea.form-control {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--dark);
+        /* Features Grid */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--dark);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 6rem 2rem;
+            background: var(--dark);
+        }
+
+        .team-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+        }
+
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .member-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .member-contact {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .member-qualification {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            color: var(--light);
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff" fill-opacity="0.1" points="0,0 1000,1000 0,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             color: white;
-            padding: 4rem 0 2rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 3rem;
-            margin-bottom: 3rem;
         }
 
-        .footer-column h3 {
-            font-size: 1.3rem;
+        .footer-column h4 {
+            color: var(--light);
             margin-bottom: 1.5rem;
-            color: var(--accent);
+            font-size: 1.2rem;
         }
 
         .footer-links {
@@ -436,440 +602,600 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .footer-links a {
-            color: #ccc;
+            color: var(--gray);
             text-decoration: none;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
             color: var(--accent);
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #333;
-            color: #999;
-            font-size: 0.9rem;
-        }
-
         .social-links {
             display: flex;
             gap: 1rem;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
-        .social-link {
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 50%;
-            color: white;
+            color: var(--light);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .social-link:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .software-house {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .emergency-numbers {
+            background: rgba(239, 68, 68, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--danger);
+        }
+
+        .emergency-numbers h5 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Responsive Design */
-        @media (max-width: 992px) {
-            .about-content, .contact-content {
-                flex-direction: column;
-            }
-            
-            .about-image {
-                order: -1;
-            }
-        }
-
         @media (max-width: 768px) {
-            .header-content {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark);
                 flex-direction: column;
-                gap: 1rem;
+                padding: 2rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 1rem;
+
+            .nav-menu.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
                 text-align: center;
             }
-            
-            .hero h1 {
+
+            .hero-content h1 {
                 font-size: 2.5rem;
             }
-            
-            .btn-group {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
-            
-            .btn-outline {
-                margin-left: 0;
+
+            .features-grid,
+            .services-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .service-card, .testimonial-card {
-                padding: 1.5rem;
-            }
+        /* Install Prompt */
+        .install-prompt {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            z-index: 1000;
+            display: none;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
     </style>
 </head>
 <body>
+    <!-- Install Prompt -->
+    <div class="install-prompt" id="installPrompt">
+        <i class="fas fa-download"></i> Install App
+    </div>
+
     <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-shield-alt logo-icon"></i>
-                    <div class="logo-text">Cyber<span>Jurist</span></div>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#home"><i class="fas fa-home nav-icon"></i> Home</a></li>
-                        <li><a href="#services"><i class="fas fa-cogs nav-icon"></i> Services</a></li>
-                        <li><a href="#about"><i class="fas fa-info-circle nav-icon"></i> About</a></li>
-                        <li><a href="#testimonials"><i class="fas fa-comments nav-icon"></i> Testimonials</a></li>
-                        <li><a href="#contact"><i class="fas fa-envelope nav-icon"></i> Contact</a></li>
-                    </ul>
-                </nav>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                CyberJurist
+            </a>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#team">Our Team</a></li>
+                <li><a href="#booking">Free Consultation</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-outline">Emergency Help</a>
+                <a href="#booking" class="btn btn-primary">Free Consultation</a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
+    <section id="home" class="hero">
+        <div class="hero-container">
             <div class="hero-content">
-                <h1>Advanced Cybersecurity Solutions for Modern Threats</h1>
-                <p>Protect your digital assets with our comprehensive security services and expert legal guidance in cybersecurity matters.</p>
-                <div class="btn-group">
-                    <a href="#contact" class="btn">Get Started</a>
-                    <a href="#services" class="btn btn-outline">Our Services</a>
+                <h1>Fight Cyber Crime With Legal & Technical Power</h1>
+                <p>Combining IT expertise with legal authority to protect your digital life. Immediate response, global reach, unbeatable results.</p>
+                
+                <div class="hero-actions">
+                    <a href="#booking" class="btn btn-primary">Get Free Consultation</a>
+                    <a href="#contact" class="btn btn-outline">Emergency Help</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-count="500">0</span>
+                        <span class="stat-label">Hackers Arrested</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="1200">0</span>
+                        <span class="stat-label">Million Recovered</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="95">0</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="floating-card">
+                    <h3><i class="fas fa-bolt"></i> 24/7 Emergency Response</h3>
+                    <p>Immediate action within 1 hour of reporting</p>
+                </div>
+                <div class="floating-card">
+                    <h3><i class="fas fa-globe"></i> Global Legal Network</h3>
+                    <p>International cooperation with 50+ countries</p>
+                </div>
+                <div class="floating-card">
+                    <h3><i class="fas fa-shield-alt"></i> Complete Protection</h3>
+                    <p>Technical + Legal solutions combined</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="booking" class="booking-section">
+        <div class="booking-container">
+            <div class="booking-header">
+                <h2>Free Consultation</h2>
+                <p>Get expert advice from our IT + Law team. No commitment required.</p>
+            </div>
+            
+            <form id="consultationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" class="form-control" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="0300-1234567">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="caseType">Case Type *</label>
+                        <select id="caseType" class="form-control" required>
+                            <option value="">Select your issue</option>
+                            <option value="social-media">Social Media Hacking</option>
+                            <option value="banking">Banking Fraud</option>
+                            <option value="identity">Identity Theft</option>
+                            <option value="blackmail">Online Blackmail</option>
+                            <option value="harassment">Cyber Harassment</option>
+                            <option value="other">Other Issue</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="query">Describe Your Issue *</label>
+                    <textarea id="query" class="form-control" required placeholder="Please describe your problem in detail..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.2rem;">
+                    <i class="fas fa-paper-plane"></i> Submit for Free Consultation
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header">
+            <h2>Why We Are Unbeatable</h2>
+            <p>The unique combination that makes hackers fear and clients trust</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>IT Forensics</h3>
+                <p>Advanced digital evidence collection and analysis with cutting-edge technology</p>
+                <ul class="footer-links">
+                    <li>• Digital Footprint Analysis</li>
+                    <li>• Server Log Examination</li>
+                    <li>• Network Traffic Monitoring</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h3>Legal Authority</h3>
+                <p>Full legal power to prosecute under Pakistani and international laws</p>
+                <ul class="footer-links">
+                    <li>• PECA 2016 Enforcement</li>
+                    <li>• International Warrants</li>
+                    <li>• Court Admissible Evidence</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Instant Response</h3>
+                <p>24/7 emergency response team ready to take immediate action</p>
+                <ul class="footer-links">
+                    <li>• 1-Hour Initial Response</li>
+                    <li>• Account Recovery</li>
+                    <li>• Evidence Preservation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="section-header">
+            <h2>Founder & CEO</h2>
+            <p>Meet the experts behind Cyber Jurist's success</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <div class="member-info">
+                    <h3>Ashfaq Haider Advocate</h3>
+                    <span class="member-title">Cyber Law Attorney (CLA)</span>
+                    <div class="member-qualification">Legal Expert - PECA 2016 Specialist</div>
+                    <span class="member-contact">
+                        <i class="fas fa-phone"></i> 📞 0300-989-3632
+                    </span>
+                    <p>Expert in cyber laws with successful track record of prosecuting electronic crimes under PECA 2016 and international cyber laws.</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="member-info">
+                    <h3>Yasir Zareen Khan</h3>
+                    <span class="member-title">IT Engineer (ITE)</span>
+                    <div class="member-qualification">Digital Forensics & Cybersecurity Expert</div>
+                    <span class="member-contact">
+                        <i class="fas fa-phone"></i> 📞 0314-507-9122
+                    </span>
+                    <p>Specialized in digital forensics, network security, and cyber crime investigation with advanced technical expertise.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Cybersecurity Services</h2>
-                <p>We offer a comprehensive range of cybersecurity solutions to protect your business from digital threats.</p>
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2>Our Protection Services</h2>
+            <p>Comprehensive solutions for all digital security threats</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <h3>Social Media Protection</h3>
+                <p>Complete security for Facebook, Instagram, WhatsApp, LinkedIn</p>
+                <div class="service-price">Free Consultation</div>
+                <a href="#booking" class="btn btn-primary">Get Protected</a>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-lock service-icon"></i>
-                    <h3>Vulnerability Assessment</h3>
-                    <p>Identify security weaknesses in your systems before attackers can exploit them.</p>
-                    <a href="#" class="btn">Learn More</a>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-credit-card"></i>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-user-shield service-icon"></i>
-                    <h3>Penetration Testing</h3>
-                    <p>Simulate real-world attacks to test your security defenses and response capabilities.</p>
-                    <a href="#" class="btn">Learn More</a>
+                <h3>Banking Fraud Recovery</h3>
+                <p>Immediate action for hacked bank accounts and financial fraud</p>
+                <div class="service-price">Success-Based Fee</div>
+                <a href="#booking" class="btn btn-primary">Recover Money</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-id-card"></i>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-gavel service-icon"></i>
-                    <h3>Cyber Legal Consulting</h3>
-                    <p>Navigate the complex legal landscape of cybersecurity with our expert guidance.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-cloud service-icon"></i>
-                    <h3>Cloud Security</h3>
-                    <p>Secure your cloud infrastructure and data with our specialized cloud security solutions.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-headset service-icon"></i>
-                    <h3>Incident Response</h3>
-                    <p>Rapid response and recovery services when security incidents occur.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-chart-line service-icon"></i>
-                    <h3>Security Training</h3>
-                    <p>Educate your team on cybersecurity best practices and threat awareness.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
+                <h3>Identity Theft Protection</h3>
+                <p>Complete identity restoration and legal action against thieves</p>
+                <div class="service-price">Free Initial Case Review</div>
+                <a href="#booking" class="btn btn-primary">Restore Identity</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About Cyber Jurist</h2>
-                    <p>Cyber Jurist is a leading cybersecurity firm that combines technical expertise with legal knowledge to provide comprehensive digital protection solutions.</p>
-                    <p>Founded by a team of cybersecurity professionals and legal experts, we understand the complex intersection of technology, security, and law in today's digital landscape.</p>
-                    <p>Our mission is to protect businesses from cyber threats while ensuring compliance with relevant regulations and legal requirements.</p>
-                    <a href="#" class="btn">Learn More About Us</a>
-                </div>
-                <div class="about-image">
-                    <!-- Placeholder for about image -->
-                    <div style="width:100%; height:400px; background:linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">
-                        <i class="fas fa-shield-alt" style="font-size:4rem; margin-right:1rem;"></i>
-                        Cybersecurity Excellence
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>500+</h3>
-                    <p>Clients Protected</p>
-                </div>
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>Threat Detection Rate</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>Security Monitoring</p>
-                </div>
-                <div class="stat-item">
-                    <h3>50+</h3>
-                    <p>Security Experts</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Clients Say</h2>
-                <p>Hear from businesses we've helped secure their digital assets.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "Cyber Jurist helped us identify critical vulnerabilities in our systems that we were completely unaware of. Their team is professional, knowledgeable, and responsive."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JS</div>
-                        <div class="author-info">
-                            <h4>John Smith</h4>
-                            <p>CTO, TechSolutions Inc.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "The legal guidance provided by Cyber Jurist was invaluable during our compliance audit. They helped us navigate complex regulations with ease."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AR</div>
-                        <div class="author-info">
-                            <h4>Amanda Roberts</h4>
-                            <p>Compliance Officer, FinancialSecure</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "Their incident response team was incredibly efficient when we experienced a security breach. They contained the threat and helped us recover quickly."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MJ</div>
-                        <div class="author-info">
-                            <h4>Michael Johnson</h4>
-                            <p>IT Director, RetailGlobal</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-                <p>Get in touch with our cybersecurity experts to discuss your protection needs.</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h4>Our Office</h4>
-                            <p>123 Security Avenue, Cyber City</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+1 (555) 123-4567</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@cyberjurist.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <h4>Business Hours</h4>
-                            <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" placeholder="Your Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Interested In</label>
-                            <select id="service" class="form-control">
-                                <option value="">Select a Service</option>
-                                <option value="assessment">Vulnerability Assessment</option>
-                                <option value="penetration">Penetration Testing</option>
-                                <option value="legal">Cyber Legal Consulting</option>
-                                <option value="cloud">Cloud Security</option>
-                                <option value="incident">Incident Response</option>
-                                <option value="training">Security Training</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" class="form-control" placeholder="Your Message"></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>⏰ 24/7 Free Advisory Available</h2>
+            <p>Don't wait until you become a victim. Get professional protection now with our IT+Law combination.</p>
+            <a href="#booking" class="btn btn-light">Start Free Consultation</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Cyber Jurist</h3>
-                    <p>Providing comprehensive cybersecurity solutions with legal expertise to protect your digital assets.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Cyber Jurist</h4>
+                <p>Combining IT expertise with legal authority to fight cyber crime. Your digital protection partner.</p>
+                
+                <div class="emergency-numbers">
+                    <h5>🚨 Emergency Numbers:</h5>
+                    <p>Police: <strong>15</strong></p>
+                    <p>FIA Cyber Crime: <strong>051-111-345-786 & 1991</strong></p>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Free Advisory</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">Consultation</span>
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
-                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
-                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Vulnerability Assessment</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Penetration Testing</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cyber Legal Consulting</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cloud Security</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Incident Response</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to our newsletter for the latest cybersecurity insights and updates.</p>
-                    <form>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email">
-                        </div>
-                        <button type="submit" class="btn">Subscribe</button>
-                    </form>
+            </div>
+
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Social Media Security</a></li>
+                    <li><a href="#services">Banking Fraud Recovery</a></li>
+                    <li><a href="#services">Identity Theft Protection</a></li>
+                    <li><a href="#services">Cyber Harassment</a></li>
+                    <li><a href="#services">Data Breach Response</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> 📧 cyberjurist.pk@gmail.com</li>
+                    <li><i class="fas fa-globe"></i> https://pakistancyberjurist.netlify.app/</li>
+                    <li><i class="fas fa-globe"></i> https://cyberjurist-pak.github.io/cyberjurist/</li>
+                    <li><i class="fas fa-clock"></i> ⏰ 24/7 Free Advisory</li>
+                </ul>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61581846842847" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.facebook.com/cyberjurist.pk/" title="Facebook Page">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/cyberjurist.pk/" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/923005893632" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Cyber Jurist. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color:var(--accent);"></i> for Security</p>
+
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">PECA 2016</a></li>
+                    <li><a href="#">Cyber Laws</a></li>
+                    <li><a href="#">International Cooperation</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Legal Rights</a></li>
+                </ul>
             </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Cyber Jurist. All rights reserved. | <span class="software-house">Powered by Zareen Software House</span> | Fighting E-Crimes with IT+Law Power</p>
         </div>
     </footer>
 
     <script>
-        // Simple JavaScript for mobile menu toggle
+        // Mobile Menu Toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('show');
+            document.querySelector('.nav-menu').classList.toggle('show');
         });
 
-        // Smooth scrolling for anchor links
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector('.nav-menu').classList.remove('show');
                 }
+            });
+        });
+
+        // Booking Form Handling
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                caseType: document.getElementById('caseType').value,
+                query: document.getElementById('query').value
+            };
+            
+            console.log('Consultation Request:', formData);
+            
+            // Show success message
+            alert('Thank you! Your free consultation request has been submitted. Our team will contact you within 1 hour.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Animated Counter
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + (target / 100));
+                    setTimeout(animateCounter, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Start counter when section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.hero'));
+
+        // PWA Installation
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.style.display = 'block';
+        });
+
+        installPrompt.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installPrompt.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+
+        // Floating cards animation
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.floating-card');
+            cards.forEach((card, index) => {
+                const speed = (index + 1) * 0.5;
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                card.style.transform = `translateX(${x}px) translateY(${y}px)`;
             });
         });
     </script>
